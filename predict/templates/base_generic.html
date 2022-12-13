@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict query rating</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            hidden_option = document.querySelector("#hidden_option");
+            first_option = document.querySelectorAll(".service_option")[0];
+
+            $('#query_type').change(function() {
+                if($(this).val() === "docs" || $(this).val() === "0")
+                {
+                    $("#service").css("display", "inline");
+                    first_option.selected = 'selected'
+                }
+                else
+                {
+                    $("#service").css("display", "none");
+                    hidden_option.selected = 'selected'
+                }
+            });
+
+            const paramsString = document.location.search
+            const searchParams = new URLSearchParams(paramsString);
+
+            if (searchParams.has('service')) {
+                let service = searchParams.get('service');
+                const options = document.querySelectorAll(".service_option");
+                
+                for(const option of options) {
+                    if (option.getAttribute("value") == service) {
+                        $("#service").css("display", "inline");
+                        option.selected = 'selected'
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    {% block content %}{% endblock %}
+</body>
+</html>

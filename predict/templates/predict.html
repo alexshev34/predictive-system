@@ -1,0 +1,35 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form action="/predict" method="get">
+    <label for="name" placeholder="Запрос:"></label>
+    <input type="text" id="query" name="query">
+    <select class="select_lable" name="query_type" id="query_type">
+        <option class="query_lable" value="1">Товар</option>
+        <option class="query_lable" value="0">Услуга</option>
+    </select>
+    <select class="select_lable service_category" name="service" id="service">
+        <option class="service_option" value="Ремонт, строительство">Ремонт, строительство</option>
+        <option class="service_option" value="Мастер на час">Мастер на час</option>
+        <option class="service_option" value="Сад, благоустройство">Сад, благоустройство</option>
+        <option class="service_option" value="Транспорт, перевозки">Транспорт, перевозки</option>
+        <option class="service_option" value="Обучение, курсы">Обучение, курсы</option>
+        <option class="service_option" value="Красота, здоровье">Красота, здоровье</option>
+        <option class="service_option" value="Ремонт и обслуживание техники">Ремонт и обслуживание техники</option>
+        <option class="service_option" value="Праздники, мероприятия">Праздники, мероприятия</option>
+        <option class="service_option" value="Доставка еды и продуктов">Доставка еды и продуктов</option>
+        <option class="service_option" value="IT, интернет">IT, интернет</option>
+        <option class="service_option" value="Реклама">Реклама</option>
+        <option class="service_option" value="Охрана, безопасность">Охрана, безопасность</option>
+        <option class="service_option" value="Бытовые услуги">Бытовые услуги</option>
+        <option selected hidden id="hidden_option" class="service_option"></option>
+    </select>
+    <button type="submit">Спрогнозировать</button>
+</form>
+{% load static %}
+<div class="view_plots">
+    <img class="plot" src="{% static ozon_path %}">
+    <img class="plot" src="{% static wildberries_path %}">
+    <img class="plot" src="{% static yandex_plot_path %}">
+</div>
+{% endblock %}
